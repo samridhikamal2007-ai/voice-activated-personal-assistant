@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # ANTIGRAVITY OS v2.4 // Futuristic voice-activated assistant
 
 An exceptionally designed, high-performance, and futuristic **voice-activated personal assistant** that combines a robust **Python-native cognitive backend** with a stunning **cyberpunk/glassmorphic telemetry dashboard** in the browser. 
@@ -127,3 +128,6 @@ Activate the assistant by **clicking the glowing circular microphone orb** (or t
 * `templates/index.html` - Sleek glassmorphic HTML grid layouts with glowing indicators.
 * `static/style.css` - Custom styling declarations, particle grids, falling rain variables, and neon animations.
 * `static/app.js` - Canvas renderer, polling tickers, clock events, Web Audio synthesizer, and browser-native voice recording hooks.
+=======
+# voice-activated-personal-assistant
+>>>>>>> 16490b2c9f75fe57408d550cf232fb7991c0e82d
