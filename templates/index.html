@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANTIGRAVITY // Cybernetic Personal Assistant</title>
+    <!-- Google Fonts for futuristic look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Outfit:wght@200;400;600;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <!-- FontAwesome for beautiful interface icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="theme-tron default-weather">
+    <!-- Overlay for rain or screen ambient particle effects -->
+    <div id="ambient-particles"></div>
+    <div id="rain-overlay"></div>
+
+    <div class="cyber-container">
+        <!-- HEADER GRID -->
+        <header class="cyber-header glass-panel">
+            <div class="header-left">
+                <div class="logo-orb"></div>
+                <div class="logo-text">
+                    <h1>ANTIGRAVITY <span>v2.4</span></h1>
+                    <p class="sys-subtitle">// CYBERNETIC COGNITIVE MODULE</p>
+                </div>
+            </div>
+            
+            <div class="header-center">
+                <div id="digital-clock" class="digital-display">00:00:00 PM</div>
+                <div id="date-display" class="date-display">TUESDAY, JUNE 02, 2026</div>
+            </div>
+
+            <div class="header-right">
+                <div class="config-item">
+                    <span class="config-label"><i class="fa-solid fa-palette"></i> THEME:</span>
+                    <select id="theme-selector" class="cyber-select">
+                        <option value="tron">TRON CYAN</option>
+                        <option value="cyberpunk">CYBERPUNK GOLD</option>
+                        <option value="nebula">DEEP NEBULA</option>
+                        <option value="matrix">MATRIX GREEN</option>
+                    </select>
+                </div>
+                <div class="config-item">
+                    <span class="config-label"><i class="fa-solid fa-microchip"></i> ENGINE:</span>
+                    <select id="engine-selector" class="cyber-select">
+                        <option value="web" selected>BROWSER AUDIO (Failsafe)</option>
+                        <option value="python">PYTHON CORE (Native)</option>
+                    </select>
+                </div>
+            </div>
+        </header>
+
+        <!-- MAIN LAYOUT GRID -->
+        <main class="cyber-grid">
+            
+            <!-- LEFT AREA: HOLO VISUALIZER & CORE CONTROL -->
+            <section class="visualizer-section glass-panel">
+                <div class="panel-header">
+                    <h2><span class="bullet"></span> COGNITIVE CORE VISUALIZER</h2>
+                    <span class="status-badge" id="system-status-badge">ONLINE</span>
+                </div>
+                
+                <div class="visualizer-wrapper">
+                    <!-- Holographic Orb Canvas -->
+                    <canvas id="holo-canvas" width="400" height="400"></canvas>
+                    <div id="orb-glow-backdrop"></div>
+                </div>
+
+                <div class="assistant-caption-box">
+                    <p id="system-status-desc" class="status-desc">BREATHING / COGNITIVE ENGINE IDLE</p>
+                    <div id="voice-waves" class="voice-waves-container">
+                        <span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                </div>
+
+                <div class="interaction-dock">
+                    <button id="mic-trigger" class="mic-button" title="Activate voice core">
+                        <i class="fa-solid fa-microphone"></i>
+                    </button>
+                    
+                    <div class="input-form">
+                        <div class="cyber-input-wrapper">
+                            <input type="text" id="manual-text-input" placeholder="Transmit direct keyboard instruction..." autocomplete="off">
+                            <button id="text-submit" class="submit-button"><i class="fa-solid fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RIGHT AREA: TELEMETRY WIDGETS -->
+            <section class="widgets-section">
+                
+                <!-- WIDGET 1: WEATHER RADAR -->
+                <div class="widget-box glass-panel" id="weather-widget">
+                    <div class="panel-header">
+                        <h2><i class="fa-solid fa-cloud-sun"></i> WEATHER TELEMETRY</h2>
+                        <span id="weather-location-badge" class="widget-subtitle">AUTO-DETECT</span>
+                    </div>
+                    <div class="weather-body">
+                        <div class="weather-main-row">
+                            <div class="weather-temp-box">
+                                <span id="w-temp" class="digital-temp">--</span><span class="deg-symbol">°C</span>
+                            </div>
+                            <div class="weather-icon-box" id="weather-icon-container">
+                                <i class="fa-solid fa-temperature-empty weather-main-icon"></i>
+                            </div>
+                        </div>
+                        <div class="weather-details-grid">
+                            <div class="w-detail-card">
+                                <span class="w-label">ATMOSPHERE</span>
+                                <span id="w-desc" class="w-value">Not Initialized</span>
+                            </div>
+                            <div class="w-detail-card">
+                                <span class="w-label">HUMIDITY</span>
+                                <span id="w-humidity" class="w-value">-- %</span>
+                            </div>
+                            <div class="w-detail-card">
+                                <span class="w-label">WIND VECTOR</span>
+                                <span id="w-wind" class="w-value">-- km/h</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- WIDGET 2: SCHEDULER & ALARMS -->
+                <div class="widget-box glass-panel">
+                    <div class="panel-header">
+                        <h2><i class="fa-solid fa-clock"></i> ACTIVE REMINDERS</h2>
+                        <button id="add-reminder-btn" class="widget-action-btn"><i class="fa-solid fa-plus"></i> NEW</button>
+                    </div>
+                    <div class="reminders-body">
+                        <!-- Add Reminder Form (Collapsed by default) -->
+                        <div id="reminder-form-box" class="reminder-form-box collapsed">
+                            <div class="form-row">
+                                <input type="text" id="rem-title" placeholder="Reminder task details..." autocomplete="off">
+                            </div>
+                            <div class="form-row flex-row">
+                                <input type="number" id="rem-seconds" placeholder="Seconds" min="1" max="86400">
+                                <button id="rem-submit" class="cyber-btn">SCHEDULE</button>
+                                <button id="rem-cancel" class="cyber-btn btn-sec">CANCEL</button>
+                            </div>
+                        </div>
+
+                        <!-- Active reminders list -->
+                        <div class="reminders-scroll" id="reminders-list-container">
+                            <div class="no-reminders-msg">
+                                <i class="fa-solid fa-bell-slash"></i>
+                                <p>No active reminders scheduled</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- WIDGET 3: NEWS FEED READER -->
+                <div class="widget-box glass-panel news-widget">
+                    <div class="panel-header">
+                        <h2><i class="fa-solid fa-newspaper"></i> DISPATCH FEED</h2>
+                        <div class="news-tabs">
+                            <button class="news-tab active" data-category="general">GEN</button>
+                            <button class="news-tab" data-category="technology">TECH</button>
+                            <button class="news-tab" data-category="science">SCI</button>
+                            <button class="news-tab" data-category="business">BIZ</button>
+                        </div>
+                    </div>
+                    <div class="news-body">
+                        <div class="news-scroll" id="news-feed-container">
+                            <!-- News Cards go here -->
+                            <div class="news-placeholder">
+                                <i class="fa-solid fa-spinner fa-spin"></i>
+                                <p>Syncing feed channels...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </main>
+
+        <!-- UNDER-THE-HOOD SYSTEM TERMINAL -->
+        <footer class="cyber-footer glass-panel">
+            <div class="panel-header">
+                <h2><i class="fa-solid fa-terminal"></i> INTERNAL COGNITIVE LOGS</h2>
+                <span class="terminal-stats" id="sys-uptime">SYS STATE: OPERATIONAL // PORT: 5000</span>
+            </div>
+            <div class="terminal-body" id="terminal-log-output">
+                <div class="terminal-line system-line">[SYS] Initializing cybernetic neural framework...</div>
+                <div class="terminal-line system-line">[SYS] PortAudio driver absent. Local mic direct fallback enabled.</div>
+                <div class="terminal-line success-line">[SYS] Dual-Mode Speech Engines active. Safe browser bridge established.</div>
+                <div class="terminal-line info-line">[SYS] Dashboard running on localhost:5000. Ready for command input.</div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- AUDIO NOTIFICATION SOUND -->
+    <audio id="alarm-sound" preload="auto">
+        <!-- Fallback synthetic audio generation via Web Audio API, or standard chime -->
+        <source src="data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA==">
+    </audio>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
